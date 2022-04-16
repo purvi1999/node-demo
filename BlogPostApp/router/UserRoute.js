@@ -7,6 +7,9 @@ const router = express.Router();
 //Regristation:
 router.post("/users", async (req, res) => {
   try {
+    if (!req.body.email) {
+      return res.status(400).send({ msg: "Please Enter User Information" });
+    }
     const new_user = await Users(req.body).save();
     const tokens = await new_user.TokenGenerate();
     res.status(201).send({

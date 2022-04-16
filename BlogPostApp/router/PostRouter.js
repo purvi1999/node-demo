@@ -34,7 +34,10 @@ router.put("/api/Blog-Post/:id", AuthMiddleware, async (req, res) => {
         Owner: req.user._id,
         _id: req.params.id,
       },
-      { ...req.body }
+      { ...req.body },
+      {
+        new: true,
+      }
     );
     if (UpdatePost == null) {
       return res.status(404).send({ msg: "Not Found Post!!!" });
